@@ -56,7 +56,7 @@ body{background:#000;display:flex;justify-content:center;overflow:hidden;font-fa
   background:linear-gradient(135deg,#fbe3a0,#b7882d 40%,#f5d58c 60%,#8a6320)}
 .inner{position:absolute;inset:0;clip-path:path('M130 0 C 182 28, 260 64, 260 140 L260 380 L0 380 L0 140 C0 64, 78 28, 130 0 Z');
   background:radial-gradient(circle at 50% 55%,#fff6dc,#ffcf7a 30%,#7a1022 75%);overflow:hidden}
-.door{position:absolute;top:0;bottom:0;width:50%;transition:transform 1.8s cubic-bezier(.6,0,.3,1);
+.door{position:absolute;top:0;bottom:0;width:50%;transition:transform 1.3s cubic-bezier(.5,0,.3,1);
   background:
    radial-gradient(circle at 50% 30%,var(--g1) 0 6px,transparent 7px),
    radial-gradient(circle at 50% 55%,var(--g2) 0 4px,transparent 5px) 0 0/100% 34px,
@@ -75,6 +75,46 @@ body{background:#000;display:flex;justify-content:center;overflow:hidden;font-fa
 .flash.go{animation:flash 1.6s ease-out}
 @keyframes flash{30%{opacity:1}100%{opacity:0}}
 
+/* ---------- 1b. BIRTHDAY CAKE — make a wish ---------- */
+#s-cake{touch-action:none;user-select:none;-webkit-user-select:none}
+.ck-k{font:700 12px Cinzel;letter-spacing:.45em}
+.ck-t{font:50px/1.05 'Pinyon Script';margin:8px 0 4px}
+.ck-s{font:italic 500 18px/1.4 'Cormorant Garamond';color:rgba(255,244,226,.85);max-width:300px;margin-bottom:34px;transition:opacity .6s}
+.cake{position:relative;width:240px;height:250px}
+.plate{position:absolute;left:-10px;right:-10px;bottom:0;height:22px;border-radius:50%;background:linear-gradient(#fbe3a0,#9c7224);box-shadow:0 10px 24px rgba(0,0,0,.5)}
+.tier{position:absolute;left:50%;transform:translateX(-50%);border-radius:10px 10px 6px 6px;
+  background:linear-gradient(90deg,#4a0b1a,#7a1830 45%,#5c1022 70%,#3b0a16);border:2px solid var(--g2);box-shadow:inset 0 -10px 20px rgba(0,0,0,.35)}
+.tier:before{content:"";position:absolute;left:-2px;right:-2px;top:-2px;height:18px;border-radius:10px 10px 0 0;
+  background:radial-gradient(circle at 10px 0,var(--g1) 0 9px,transparent 9.5px) 0 0/20px 18px,linear-gradient(var(--g1),var(--g1)) 0 0/100% 6px no-repeat}
+.tier:after{content:"";position:absolute;left:8px;right:8px;bottom:12px;height:8px;background:radial-gradient(circle,#fff4e2 0 2.6px,transparent 3px) 0 0/14px 8px;opacity:.85}
+.tier.t1{bottom:12px;width:230px;height:92px}
+.tier.t2{bottom:102px;width:160px;height:76px}
+.cdls{position:absolute;bottom:176px;left:50%;transform:translateX(-50%);display:flex;gap:26px}
+.cdl{position:relative;width:11px;height:48px;border-radius:3px;background:repeating-linear-gradient(160deg,#fff4e2 0 6px,#e2b552 6px 10px);box-shadow:0 0 6px rgba(0,0,0,.3)}
+.cdl:before{content:"";position:absolute;left:50%;top:-7px;width:2px;height:8px;margin-left:-1px;background:#3a2a10}
+.flame{position:absolute;left:50%;top:-34px;width:16px;height:28px;margin-left:-8px;border-radius:50% 50% 50% 50%/62% 62% 38% 38%;
+  background:radial-gradient(circle at 50% 75%,#fff 0 18%,#ffe08a 35%,#ff9a2e 70%,rgba(255,80,0,0) 100%);
+  box-shadow:0 0 18px 6px rgba(255,190,90,.55),0 0 50px 14px rgba(255,160,60,.25);transform-origin:50% 90%;animation:flick .5s ease-in-out infinite alternate;transition:transform .5s,opacity .5s}
+.cdl:nth-child(2) .flame{animation-delay:.15s}.cdl:nth-child(3) .flame{animation-delay:.3s}.cdl:nth-child(4) .flame{animation-delay:.1s}
+@keyframes flick{to{transform:scale(.9,1.08) rotate(3deg)}}
+.cdl{cursor:pointer}
+.cdl .hit{position:absolute;inset:-46px -14px -10px}
+.cdl:not(.lit) .flame{transform:scale(0);opacity:0;animation:none}
+.cdl:not(.lit){animation:wick 1.4s ease-in-out infinite}
+@keyframes wick{50%{box-shadow:0 0 14px 4px rgba(255,210,120,.55)}}
+.ck-words{height:40px;display:flex;gap:10px;align-items:flex-end;justify-content:center;margin:-18px 0 22px}
+.ck-words span{font:600 italic 26px 'Cormorant Garamond';color:var(--g1);opacity:0;transform:translateY(10px) scale(.8);transition:all .8s cubic-bezier(.2,1.4,.4,1);text-shadow:0 0 14px rgba(255,200,110,.6)}
+.ck-words span.on{opacity:1;transform:none}
+.swipe{opacity:0}.swipe.on{opacity:1}
+.cake.out .flame{transform:scale(0) translateY(-10px)!important;opacity:0;animation:none}
+.smoke{position:absolute;width:10px;height:10px;border-radius:50%;background:rgba(240,230,220,.55);filter:blur(4px);pointer-events:none;z-index:6;animation:smoke 2.4s ease-out forwards}
+@keyframes smoke{to{transform:translate(var(--dx),-130px) scale(4);opacity:0}}
+.swipe{margin-top:22px;display:flex;flex-direction:column;align-items:center;gap:6px;font:600 10px Montserrat;letter-spacing:.35em;color:var(--g1);transition:opacity .6s}
+.swipe i{display:block;width:2px;height:34px;background:linear-gradient(transparent,var(--g1));animation:swipeUp 1.6s ease-in-out infinite}
+@keyframes swipeUp{0%{transform:translateY(14px);opacity:0}40%{opacity:1}100%{transform:translateY(-14px);opacity:0}}
+.ck-done{font:46px/1.1 'Pinyon Script';margin-top:18px;opacity:0;transition:opacity 1.2s}
+.ck-done.on{opacity:1}
+
 /* ---------- 2. TITLE ---------- */
 .t-small{font:700 14px Cinzel;letter-spacing:.4em;opacity:0;transition:opacity 1s .2s}
 .t-name{font:76px/1 'Pinyon Script';margin:14px 0 6px;opacity:0;transform:scale(.9);transition:all 1.4s .6s;filter:drop-shadow(0 0 22px rgba(255,200,110,.35))}
@@ -82,6 +122,10 @@ body{background:#000;display:flex;justify-content:center;overflow:hidden;font-fa
 .t-sub{font:italic 500 21px/1.45 'Cormorant Garamond';max-width:320px;opacity:0;transition:opacity 1.2s 1.6s}
 .sc.on .t-small,.sc.on .t-name,.sc.on .t-sub{opacity:1;transform:none}
 .sc.on .t-line{width:200px}
+.t-story{font:italic 500 25px/1.5 'Cormorant Garamond';max-width:330px;min-height:300px;color:var(--cream)}
+.t-story p{margin-bottom:14px}
+.t-story p.last{font:42px/1.15 'Pinyon Script';color:var(--g1);text-shadow:0 0 18px rgba(255,200,110,.45);margin-top:10px}
+.t-story .cur{display:inline-block;width:2px;height:1em;background:var(--g1);margin-left:2px;vertical-align:-2px;animation:blink .8s infinite}
 
 /* ---------- 3. MEMORIES (royal jharokha frame) ---------- */
 .frame{position:relative;width:258px;height:362px;opacity:0;transform:translateY(30px) scale(.94);transition:all 1.1s cubic-bezier(.2,.9,.2,1)}
@@ -155,6 +199,47 @@ body{background:#000;display:flex;justify-content:center;overflow:hidden;font-fa
 .ry-sub{font:italic 500 18px 'Cormorant Garamond';opacity:0;transition:opacity 1.2s .8s;margin-top:4px}
 .ry-sub.on{opacity:1}
 
+/* ---------- 3d. CONNECT THE STARS ---------- */
+#s-stars{user-select:none;-webkit-user-select:none}
+.sr-k{font:700 12px Cinzel;letter-spacing:.45em}
+.sr-t{font:50px/1.05 'Pinyon Script';margin:6px 0 4px}
+.sr-s{font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,244,226,.7);margin-bottom:22px;transition:opacity .6s}
+.sky{position:relative;width:320px;max-width:100%;aspect-ratio:320/300;border-radius:22px;overflow:hidden;
+  background:radial-gradient(circle at 50% 25%,#3a1650,#1a0a2a 55%,#0d0517);border:2px solid var(--g2);box-shadow:0 18px 40px rgba(0,0,0,.55),inset 0 0 40px rgba(0,0,0,.6)}
+.sky svg{width:100%;height:100%;display:block;touch-action:manipulation}
+.sky .tw{animation:tw 2.4s ease-in-out infinite}
+@keyframes tw{50%{opacity:.15}}
+.st{cursor:pointer}
+.st .halo{transform-box:fill-box;transform-origin:center;opacity:0}
+.st.next .halo{opacity:1;animation:halo 1.1s ease-in-out infinite}
+@keyframes halo{50%{transform:scale(1.8);opacity:.25}}
+.st .core{fill:#fff7dc;transition:fill .4s}
+.st.on .core{fill:#f3d48a}
+.sky .ln{stroke:#f3d48a;stroke-width:2.2;stroke-linecap:round;filter:drop-shadow(0 0 4px #f3d48a);stroke-dasharray:400;stroke-dashoffset:400;animation:draw .6s ease-out forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.sky .hfill{opacity:0;transition:opacity 1.6s}
+.sky.done .hfill{opacity:1}
+.sr-msg{font:36px/1.15 'Pinyon Script';margin-top:20px;max-width:330px;opacity:0;transition:opacity 1.2s}
+.sr-msg.on{opacity:1}
+.sr-sub{font:italic 500 19px 'Cormorant Garamond';opacity:0;transition:opacity 1.2s .8s;margin-top:4px}
+.sr-sub.on{opacity:1}
+
+/* ---------- 3c. SCRATCH — I love you ---------- */
+.lv-k{font:700 12px Cinzel;letter-spacing:.45em}
+.lv-t{font:italic 500 26px 'Cormorant Garamond';margin:8px 0 4px}
+.lv-s{font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,244,226,.7);margin-bottom:26px;transition:opacity .6s}
+.scard{position:relative;width:290px;height:330px;border-radius:18px;padding:3px;background:linear-gradient(135deg,#fde7a8,#b4842a 35%,#f6d68c 55%,#8f6521 80%,#e8c072);box-shadow:0 18px 40px rgba(0,0,0,.5)}
+.scard .in{position:relative;width:100%;height:100%;border-radius:15px;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:radial-gradient(circle at 50% 40%,#fff4e2,#f6dcb0 60%,#e9c48a)}
+.scard .hrt{font-size:50px;line-height:1;animation:hb 1.2s ease-in-out infinite;filter:drop-shadow(0 4px 8px rgba(179,18,58,.35))}
+@keyframes hb{0%,100%{transform:scale(1)}15%{transform:scale(1.18)}30%{transform:scale(1)}45%{transform:scale(1.12)}}
+.scard .big{font:64px/1 'Pinyon Script';color:#7a1022;margin-top:8px}
+.scard .sm{font:italic 600 18px/1.4 'Cormorant Garamond';color:#5c1022;max-width:230px;margin-top:10px}
+.lv-lang{font:italic 600 26px/1.3 'Cormorant Garamond';color:var(--g1);margin-top:22px;min-height:36px;opacity:0;transition:opacity .5s}
+.lv-lang.on{opacity:1}
+.scard canvas{position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);border-radius:15px;touch-action:none;cursor:grab;transition:opacity 1s}
+.scard.done canvas{opacity:0;pointer-events:none}
+
 /* ---------- 4. FINALE — crown for the queen ---------- */
 #s-final{justify-content:flex-start;padding-top:56px;overflow-y:auto;overflow-x:hidden}
 #s-final > *{flex-shrink:0}
@@ -205,12 +290,27 @@ body{background:#000;display:flex;justify-content:center;overflow:hidden;font-fa
     <div class="door-tap">Tap to open</div>
   </section>
 
-  <!-- 2. TITLE -->
+  <!-- 1b. BIRTHDAY CAKE -->
+  <section class="sc" id="s-cake">
+    <div class="ck-k goldtxt" id="ckKick"></div>
+    <div class="ck-t goldtxt" id="ckTitle"></div>
+    <div class="ck-s" id="ckHint"></div>
+    <div class="ck-words" id="ckWords"></div>
+    <div class="cake" id="cake">
+      <div class="plate"></div>
+      <div class="tier t1"></div><div class="tier t2"></div>
+      <div class="cdls" id="cdls"></div>
+    </div>
+    <div class="swipe" id="swipe"><i></i>SWIPE UP TO BLOW</div>
+    <div class="ck-done goldtxt" id="ckDone"></div>
+    <button class="lt-help" id="ckHelp" hidden>Do it for me ✨</button>
+  </section>
+
+  <!-- 2. ONCE UPON A TIME -->
   <section class="sc" id="s-title">
-    <div class="t-small goldtxt">HAPPY BIRTHDAY</div>
-    <div class="t-name goldtxt" id="tName"></div>
+    <div class="t-small goldtxt" id="tKick"></div>
     <div class="t-line"></div>
-    <div class="t-sub" id="tSub"></div>
+    <div class="t-story" id="tStory"></div>
   </section>
 
   <div id="moments"></div>
@@ -246,6 +346,30 @@ body{background:#000;display:flex;justify-content:center;overflow:hidden;font-fa
     <button class="lt-help" id="ryHelp" hidden>Unite us for me ✨</button>
   </section>
 
+  <!-- 3d. CONNECT THE STARS -->
+  <section class="sc" id="s-stars">
+    <div class="sr-k goldtxt" id="srKick"></div>
+    <div class="sr-t goldtxt" id="srTitle"></div>
+    <div class="sr-s" id="srHint"></div>
+    <div class="sky" id="sky"><svg id="skySvg" viewBox="0 0 320 300"></svg></div>
+    <div class="sr-msg goldtxt" id="srMsg"></div>
+    <div class="sr-sub" id="srSub"></div>
+    <button class="lt-help" id="srHelp" hidden>Connect them for me ✨</button>
+  </section>
+
+  <!-- 3c. SCRATCH — I LOVE YOU -->
+  <section class="sc" id="s-love">
+    <div class="lv-k goldtxt" id="lvKick"></div>
+    <div class="lv-t" id="lvTitle"></div>
+    <div class="lv-s" id="lvHint"></div>
+    <div class="scard" id="scard">
+      <div class="in"><div class="hrt">❤️</div><div class="big" id="lvBig"></div><div class="sm" id="lvSmall"></div></div>
+      <canvas id="scratch"></canvas>
+    </div>
+    <div class="lv-lang" id="lvLang"></div>
+    <button class="lt-help" id="lvHelp" hidden>Reveal it for me ✨</button>
+  </section>
+
   <!-- 4. FINALE -->
   <section class="sc" id="s-final">
     <div class="fwrap">
@@ -278,7 +402,22 @@ const LOVE = {
   crownPhoto: 1,                           // photo used in the finale with the crown
 
   doorTitle: "Something royal is waiting for you…",
-  titleSub: "To the woman who makes every day feel like a celebration.",
+
+  // FIRST: birthday cake — she makes a wish and swipes up to blow the candles
+  cakeWords: ["Happy", "Birthday", "Roshini 👑"],     // one candle per word
+  cakeKick: "IT'S YOUR BIRTHDAY",
+  cakeTitle: "Light your candles",
+  cakeHint: "Tap each candle to light it ✨",
+  cakeHint2: "Now close your eyes, make a wish… and swipe up to blow 🌬️",
+  cakeDone: "Wish granted ✨",
+
+  // after the cake: a "once upon a time" story types itself out
+  storyKick: "ONCE UPON A TIME",
+  story: [
+    "A boy named Navakethan met a girl named Roshini…",
+    "…and from that day, his whole world had a new queen.",
+    "This is her story 👑"                 // last line shows big & golden
+  ],
 
   lines: [
     "The most graceful woman I know — and she's mine.",            // 1 saree
@@ -291,6 +430,14 @@ const LOVE = {
   ],
   photoTime: 3600,
 
+  // STARS: she taps glowing stars one by one — they join into a heart
+  starsAfter: 2,                           // comes after this photo number
+  starsKick: "LOOK UP, MY LOVE",
+  starsTitle: "Connect the stars",
+  starsHint: "Tap the glowing star ✨",
+  starsMsg: "Of all the stars in the sky, I found you",
+  starsSub: "my brightest one ✨",
+
   // ROYAL SCENE for both of you: she holds the seal, the two halves join
   royalAfter: 4,                           // comes after this photo number
   royalPhoto: 2,                           // couple photo inside the locket
@@ -300,6 +447,15 @@ const LOVE = {
   royalHint: "Hold the royal seal to unite us",
   royalMsg: "Two hearts, one kingdom",
   royalSub: "Navakethan & Roshini — together, we rule our little world 👑",
+
+  // LOVE YOU: she scratches a gold card to reveal the secret
+  loveAfter: 7,                            // comes after this photo number
+  loveKick: "ONE LAST SECRET",
+  loveTitle: "Something I want you to know…",
+  loveHint: "Scratch the gold with your finger",
+  loveBig: "I Love You",
+  loveSmall: "more than words, more than forever — always yours, Navakethan",
+  loveLangs: ["I love you", "నేను నిన్ను ప్రేమిస్తున్నాను", "मैं तुमसे प्यार करता हूँ", "Je t'aime", "Ti amo", "Forever yours ❤️"],
 
   // later: she opens golden lotuses to set butterflies free
   lotusAfter: 6,                           // comes after this photo number
@@ -326,8 +482,7 @@ const box = el => { const a = app.getBoundingClientRect(), r = el.getBoundingCli
 
 /* ---------- build ---------- */
 $("#doorTitle").textContent = LOVE.doorTitle;
-$("#tName").textContent = LOVE.name;
-$("#tSub").textContent = LOVE.titleSub;
+$("#tKick").textContent = LOVE.storyKick;
 $("#fName").textContent = "my Queen " + LOVE.name;
 $("#sign").textContent = LOVE.from;
 $("#note").innerHTML = LOVE.note.map(p => `<p>${p}</p>`).join("");
@@ -339,6 +494,22 @@ $("#ryTitle").textContent = LOVE.royalTitle;
 $("#ryHint").textContent = LOVE.royalHint;
 $("#ryMsg").textContent = LOVE.royalMsg;
 $("#rySub").textContent = LOVE.royalSub;
+$("#ckKick").textContent = LOVE.cakeKick;
+$("#ckTitle").textContent = LOVE.cakeTitle;
+$("#ckHint").textContent = LOVE.cakeHint;
+$("#ckDone").textContent = LOVE.cakeDone;
+$("#cdls").innerHTML = LOVE.cakeWords.map((_, i) => `<div class="cdl" data-i="${i}"><div class="flame"></div><div class="hit"></div></div>`).join("");
+$("#ckWords").innerHTML = LOVE.cakeWords.map(w => `<span>${w}</span>`).join("");
+$("#srKick").textContent = LOVE.starsKick;
+$("#srTitle").textContent = LOVE.starsTitle;
+$("#srHint").textContent = LOVE.starsHint;
+$("#srMsg").textContent = LOVE.starsMsg;
+$("#srSub").textContent = LOVE.starsSub;
+$("#lvKick").textContent = LOVE.loveKick;
+$("#lvTitle").textContent = LOVE.loveTitle;
+$("#lvHint").textContent = LOVE.loveHint;
+$("#lvBig").textContent = LOVE.loveBig;
+$("#lvSmall").textContent = LOVE.loveSmall;
 $("#sealTxt").firstChild.textContent = LOVE.husband[0] + " ♥ " + LOVE.name[0];
 $("#ryL").dataset.ph = $("#ryR").dataset.ph = $("#ryW").dataset.ph = LOVE.royalPhoto - 1;
 
@@ -384,13 +555,18 @@ function dust(n = 40) {
   const W = app.clientWidth, H = app.clientHeight;
   for (let i = 0; i < n; i++) P.push({ x: Math.random() * W, y: H + Math.random() * 200, vx: (Math.random() - .5) * .4, vy: -.5 - Math.random() * 1.1, g: 0, s: .8 + Math.random() * 2, c: GC[i % 4], l: 1, d: .003 });
 }
+function hearts(n = 24) {
+  const W = app.clientWidth, H = app.clientHeight;
+  for (let i = 0; i < n; i++) P.push({ h: 1, x: Math.random() * W, y: H + Math.random() * 120, vx: (Math.random() - .5) * .6, vy: -1.2 - Math.random() * 1.8, g: 0, s: 2.4 + Math.random() * 2.6, c: ["#ff5c7a", "#ffb8c6", "#f3d48a", "#e0234e"][i % 4], l: 1, d: .004 });
+}
 (function loop() {
   const W = app.clientWidth, H = app.clientHeight; cx.clearRect(0, 0, W, H);
   P = P.filter(p => p.l > 0 && p.y > -40 && p.y < H + 260);
   for (const p of P) {
     p.vy += p.g; p.x += p.vx; p.y += p.vy; p.l -= p.d;
     cx.globalAlpha = Math.max(0, Math.min(1, p.l)); cx.fillStyle = p.c;
-    cx.beginPath(); cx.arc(p.x, p.y, p.s, 0, 7); cx.fill();
+    if (p.h) { cx.font = `${p.s * 6}px serif`; cx.fillText("❤", p.x, p.y); }
+    else { cx.beginPath(); cx.arc(p.x, p.y, p.s, 0, 7); cx.fill(); }
   }
   cx.globalAlpha = 1;
   requestAnimationFrame(loop);
@@ -492,6 +668,149 @@ function royalGame() {
   });
 }
 
+/* ---------- birthday cake: swipe up to blow ---------- */
+function cakeGame() {
+  return new Promise(res => {
+    const sc = $("#s-cake"); let y0 = null, done = false, ready = false; const lit = new Set();
+    function light(c) {
+      const i = +c.dataset.i; if (lit.has(i)) return; lit.add(i);
+      c.classList.add("lit"); $$("#ckWords span")[i].classList.add("on");
+      const [x, y] = at(c.querySelector(".flame")); sparkle(x, y, 30);
+      if (lit.size === LOVE.cakeWords.length) setTimeout(() => {
+        ready = true; $("#ckTitle").textContent = "Make a wish, my queen"; $("#ckHint").textContent = LOVE.cakeHint2; $("#swipe").classList.add("on");
+      }, 700);
+    }
+    $$(".cdl").forEach(c => c.addEventListener("pointerdown", e => { e.stopPropagation(); light(c); }));
+    function blow() {
+      if (done || !ready) return; done = true;
+      $("#cake").classList.add("out"); $("#swipe").style.opacity = 0; $("#ckHint").style.opacity = 0; $("#ckHelp").hidden = true;
+      $$(".flame").forEach(f => {
+        const b = box(f);
+        for (let k = 0; k < 3; k++) {
+          const m = document.createElement("div"); m.className = "smoke";
+          m.style.left = b.l + b.w / 2 - 5 + "px"; m.style.top = b.t + b.h / 2 + "px";
+          m.style.setProperty("--dx", (Math.random() - .5) * 50 + "px"); m.style.animationDelay = k * .25 + "s";
+          app.appendChild(m); setTimeout(() => m.remove(), 3200);
+        }
+      });
+      setTimeout(() => {
+        $("#flash").classList.remove("go"); void $("#flash").offsetWidth; $("#flash").classList.add("go");
+        const [x, y] = at($("#cake")); sparkle(x, y - 60, 260); sparkle(app.clientWidth * .2, app.clientHeight * .3, 80); sparkle(app.clientWidth * .8, app.clientHeight * .3, 80);
+        dust(70); $("#ckDone").classList.add("on");
+      }, 900);
+      setTimeout(res, 3800);
+    }
+    sc.addEventListener("pointerdown", e => { y0 = e.clientY; });
+    sc.addEventListener("pointermove", e => { if (y0 !== null && y0 - e.clientY > 50) blow(); });
+    sc.addEventListener("pointerup", e => { if (y0 !== null && y0 - e.clientY > 35) blow(); y0 = null; });
+    sc.addEventListener("wheel", e => { if (e.deltaY > 20 || e.deltaY < -20) blow(); }, { passive: true });
+    $("#ckHelp").onclick = e => { e.stopPropagation(); $$(".cdl").forEach((c, i) => setTimeout(() => light(c), i * 350)); setTimeout(() => { ready = true; blow(); }, 2200); };
+    setTimeout(() => { if (!done) { const b = $("#ckHelp"); b.hidden = false; b.removeAttribute("hidden"); } }, 20000);
+  });
+}
+
+/* ---------- scratch card: I love you ---------- */
+function loveGame() {
+  return new Promise(res => {
+    const cvs = $("#scratch"), card = $("#scard"), k = devicePixelRatio || 1;
+    const W = cvs.offsetWidth, H = cvs.offsetHeight; cvs.width = W * k; cvs.height = H * k;
+    const g = cvs.getContext("2d"); g.scale(k, k);
+    const gr = g.createLinearGradient(0, 0, W, H);
+    gr.addColorStop(0, "#f9e3a4"); gr.addColorStop(.35, "#c8962f"); gr.addColorStop(.55, "#f6d68c"); gr.addColorStop(.8, "#a8781f"); gr.addColorStop(1, "#e8c072");
+    g.fillStyle = gr; g.fillRect(0, 0, W, H);
+    g.globalAlpha = .18; g.fillStyle = "#fff";
+    for (let x = -H; x < W; x += 14) { g.beginPath(); g.moveTo(x, H); g.lineTo(x + H, 0); g.lineTo(x + H + 4, 0); g.lineTo(x + 4, H); g.fill(); }
+    g.globalAlpha = 1; g.fillStyle = "#5c1022"; g.textAlign = "center";
+    g.font = "40px serif"; g.fillText("❤", W / 2, H / 2 - 18);
+    g.font = "600 13px Montserrat, sans-serif"; g.fillText("S C R A T C H   H E R E", W / 2, H / 2 + 22);
+    g.globalCompositeOperation = "destination-out";
+    let down = false, last = null, moves = 0, done = false;
+    const pt = e => { const r = cvs.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+    function rub(e) {
+      const [x, y] = pt(e); g.lineWidth = 44; g.lineCap = "round";
+      g.beginPath(); g.arc(x, y, 22, 0, 7); g.fill();
+      if (last) { g.beginPath(); g.moveTo(last[0], last[1]); g.lineTo(x, y); g.stroke(); }
+      last = [x, y];
+      if (++moves % 6 === 0) { const a = at(card); sparkle(a[0] - W / 2 + x, a[1] - H / 2 + y, 4); check(); }
+    }
+    function check() {
+      const d = g.getImageData(0, 0, cvs.width, cvs.height).data; let c = 0, t = 0;
+      for (let i = 3; i < d.length; i += 64) { t++; if (d[i] === 0) c++; }
+      if (c / t > .5) finish();
+    }
+    function finish() {
+      if (done) return; done = true; card.classList.add("done"); $("#lvHint").style.opacity = 0; $("#lvHelp").hidden = true;
+      const [x, y] = at(card); sparkle(x, y, 220); hearts(40);
+      setTimeout(() => hearts(30), 900);
+      const L = $("#lvLang"), langs = LOVE.loveLangs || [];
+      langs.forEach((w, i) => setTimeout(() => { L.classList.remove("on"); setTimeout(() => { L.textContent = w; L.classList.add("on"); if (i % 2) hearts(10); }, 400); }, 1200 + i * 1500));
+      setTimeout(res, 1200 + langs.length * 1500 + 1600);
+    }
+    cvs.addEventListener("pointerdown", e => { down = true; last = null; cvs.setPointerCapture && cvs.setPointerCapture(e.pointerId); rub(e); });
+    cvs.addEventListener("pointermove", e => { if (down) rub(e); });
+    ["pointerup", "pointercancel"].forEach(ev => cvs.addEventListener(ev, () => { down = false; last = null; check(); }));
+    $("#lvHelp").onclick = finish;
+    setTimeout(() => { if (!done) { const b = $("#lvHelp"); b.hidden = false; b.removeAttribute("hidden"); } }, 20000);
+  });
+}
+
+/* ---------- connect the stars ---------- */
+function starsGame() {
+  return new Promise(res => {
+    const svg = $("#skySvg"), NS = "http://www.w3.org/2000/svg", N = 10;
+    const pts = Array.from({ length: N }, (_, k) => {
+      const t = k / N * Math.PI * 2;
+      const x = 16 * Math.sin(t) ** 3, y = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
+      return [160 + x * 8, 128 + y * 8];
+    });
+    let bg = "";
+    for (let i = 0; i < 45; i++) bg += `<circle class="tw" cx="${(Math.random() * 320).toFixed(1)}" cy="${(Math.random() * 300).toFixed(1)}" r="${(Math.random() * 1.2 + .3).toFixed(2)}" fill="#fff" style="animation-delay:${(Math.random() * 2.4).toFixed(2)}s"/>`;
+    const heart = "M" + pts.map(p => p.map(v => v.toFixed(1)).join(" ")).join(" L") + " Z";
+    svg.innerHTML = bg + `<defs><radialGradient id="hfg"><stop offset="0" stop-color="#ff6b8a" stop-opacity=".55"/><stop offset="1" stop-color="#b3123a" stop-opacity=".15"/></radialGradient></defs>
+      <path class="hfill" d="${heart}" fill="url(#hfg)"/><g id="lines"></g>` +
+      pts.map((p, i) => `<g class="st" data-i="${i}"><circle class="halo" cx="${p[0]}" cy="${p[1]}" r="11" fill="#f3d48a"/><circle class="core" cx="${p[0]}" cy="${p[1]}" r="4.5"/><circle cx="${p[0]}" cy="${p[1]}" r="22" fill="transparent"/></g>`).join("");
+    const stars = $$("#skySvg .st"); let cur = 0, done = false;
+    stars[0].classList.add("next");
+    const line = (a, b) => { const l = document.createElementNS(NS, "line"); l.setAttribute("class", "ln");
+      l.setAttribute("x1", a[0]); l.setAttribute("y1", a[1]); l.setAttribute("x2", b[0]); l.setAttribute("y2", b[1]); $("#lines").appendChild(l); };
+    function tap(i) {
+      if (done || i !== cur) return;
+      const st = stars[i]; st.classList.remove("next"); st.classList.add("on");
+      const [x, y] = at(st.querySelector(".core")); sparkle(x, y, 22);
+      if (i > 0) line(pts[i - 1], pts[i]);
+      cur++;
+      if (cur < N) stars[cur].classList.add("next"); else finish();
+    }
+    function finish() {
+      done = true; line(pts[N - 1], pts[0]); $("#srHint").style.opacity = 0; $("#srHelp").hidden = true;
+      setTimeout(() => {
+        $("#sky").classList.add("done");
+        const [x, y] = at($("#sky")); sparkle(x, y, 200); hearts(24);
+        $("#srMsg").classList.add("on"); $("#srSub").classList.add("on");
+      }, 600);
+      setTimeout(res, 5200);
+    }
+    stars.forEach(st => st.addEventListener("pointerdown", () => tap(+st.dataset.i)));
+    $("#srHelp").onclick = () => { const go = () => { if (done) return; tap(cur); setTimeout(go, 220); }; go(); };
+    setTimeout(() => { if (!done) { const b = $("#srHelp"); b.hidden = false; b.removeAttribute("hidden"); } }, 20000);
+  });
+}
+
+/* ---------- once upon a time: typewriter ---------- */
+async function typeStory() {
+  const box = $("#tStory"); box.innerHTML = "";
+  for (let i = 0; i < LOVE.story.length; i++) {
+    const p = document.createElement("p"); if (i === LOVE.story.length - 1) p.className = "last";
+    const cur = document.createElement("span"); cur.className = "cur";
+    p.appendChild(document.createTextNode("")); p.appendChild(cur); box.appendChild(p);
+    const chars = Array.from(LOVE.story[i]);
+    for (const ch of chars) { p.firstChild.textContent += ch; await wait(ch === "…" || ch === "," ? 260 : 42); }
+    cur.remove();
+    if (i === LOVE.story.length - 1) { const [x, y] = at(p); sparkle(x, y, 120); }
+    await wait(700);
+  }
+}
+
 /* ---------- song ---------- */
 let song;
 function startSong() {
@@ -513,21 +832,36 @@ $("#s-door").addEventListener("click", async () => {
   if (started) return; started = true;
   startSong();
   bf.classList.remove("rest");
-  await flyTo(app.clientWidth * .78, 70, 900);
   $("#doorwrap").classList.add("open");
-  setTimeout(() => { $("#flash").classList.add("go"); const [x, y] = at($("#doorwrap")); sparkle(x, y, 180); dust(60); }, 700);
-  await wait(1900);
+  flyTo(app.clientWidth * .78, 70, 900);
+  setTimeout(() => { $("#flash").classList.add("go"); const [x, y] = at($("#doorwrap")); sparkle(x, y, 180); dust(60); }, 350);
+  await wait(1400);
+  show("s-cake");
+  flyTo(app.clientWidth - 50, 96, 1400, true);
+  await cakeGame();
   show("s-title");
-  flyTo(app.clientWidth * .5 + 110, app.clientHeight * .5 - 80, 1600, true);
-  await wait(4300);
+  flyTo(app.clientWidth - 50, 96, 1600, true);
+  await wait(1300);
+  await typeStory();
+  await wait(1800);
   for (let i = 0; i < LOVE.photos.length; i++) {
     const s = show("m" + i);
     landOn(s.querySelector(".frame"));
     await wait(LOVE.photoTime);
+    if (i + 1 === LOVE.starsAfter) {
+      show("s-stars");
+      flyTo(46, 96, 1200, true);
+      await starsGame();
+    }
     if (i + 1 === LOVE.royalAfter) {
       show("s-royal");
       flyTo(46, 96, 1200, true);
       await royalGame();
+    }
+    if (i + 1 === LOVE.loveAfter) {
+      show("s-love");
+      flyTo(46, 96, 1200, true);
+      await loveGame();
     }
     if (i + 1 === LOVE.lotusAfter) {
       show("s-lotus");
