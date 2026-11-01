@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>For My Queen 👑</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   UNSAID — Royal Silk & Butterfly · Husband ➜ Wife
+   ========================================================= */
+:root{--m1:#3b0a16;--m2:#5c1022;--m3:#24050c;--g1:#f3d48a;--g2:#d4a443;--g3:#9c7224;--cream:#fff4e2}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{background:#000;display:flex;justify-content:center;overflow:hidden;font-family:Montserrat,sans-serif;color:var(--cream)}
+.app{position:relative;width:100%;max-width:440px;height:100vh;height:100dvh;min-height:600px;overflow:hidden;overflow:clip;
+  background:radial-gradient(90% 60% at 50% 40%,var(--m2) 0%,var(--m1) 50%,var(--m3) 100%)}
+[hidden]{display:none!important}
+/* silk sheen + zari borders */
+.silk{position:absolute;inset:0;pointer-events:none;opacity:.25;
+  background:repeating-linear-gradient(115deg,transparent 0 22px,rgba(255,215,150,.05) 22px 24px),
+             radial-gradient(60% 40% at 30% 20%,rgba(255,200,120,.18),transparent 70%)}
+.zari{position:absolute;left:0;right:0;height:22px;z-index:20;pointer-events:none;
+  background:
+   radial-gradient(circle at 11px 11px,var(--g1) 0 3px,transparent 3.5px) 0 0/22px 22px,
+   linear-gradient(90deg,transparent 0 6px,var(--g3) 6px 16px,transparent 16px) 0 0/22px 22px,
+   linear-gradient(var(--m3),var(--m3));
+  border-top:2px solid var(--g2);border-bottom:2px solid var(--g2);opacity:.9}
+.zari.t{top:0}.zari.b{bottom:0}
+#fx{position:absolute;inset:0;width:100%;height:100%;z-index:30;pointer-events:none}
+#warn{position:absolute;top:0;left:0;right:0;background:#c0392b;color:#fff;font-size:12px;padding:6px 10px;z-index:99;display:none}
+
+.sc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 22px;
+  opacity:0;visibility:hidden;transition:opacity 1s ease,visibility 0s 1s,filter 1s;filter:blur(6px);z-index:5}
+.sc.on{opacity:1;visibility:visible;filter:none;transition:opacity 1s ease,filter 1s}
+.kick{font:600 10px Montserrat;letter-spacing:.5em;text-transform:uppercase;color:var(--g1)}
+.goldtxt{background:linear-gradient(100deg,#b8862b 0%,#fff1c4 45%,#e2b552 55%,#a8781f 100%);background-size:250% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 3.5s ease-in-out infinite}
+@keyframes shine{from{background-position:100% 0}to{background-position:-50% 0}}
+
+/* ---------- golden butterfly ---------- */
+#bf{position:absolute;left:0;top:0;width:58px;height:46px;z-index:35;pointer-events:none;
+  transition:transform 1.5s cubic-bezier(.45,.05,.3,1);filter:drop-shadow(0 0 10px rgba(255,210,120,.8))}
+#bf .in{animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-6px) rotate(4deg)}}
+.bfy{width:100%;height:100%;overflow:visible}
+.bfy .wl,.bfy .wr{transform-box:view-box;transform-origin:50px 42px;animation:flap .22s ease-in-out infinite alternate}
+.bfy .wr{animation-delay:0s}
+@keyframes flap{to{transform:scaleX(.25)}}
+#bf.rest .bfy .wl,#bf.rest .bfy .wr{animation-duration:1.1s}
+
+/* ---------- 1. PALACE DOORS ---------- */
+#s-door{padding:0;cursor:pointer}
+.doorwrap{position:relative;width:260px;height:380px;perspective:900px;margin-top:10px}
+.arch{position:absolute;inset:-14px;clip-path:path('M144 0 C 200 30, 288 70, 288 150 L288 408 L0 408 L0 150 C0 70, 88 30, 144 0 Z');
+  background:linear-gradient(135deg,#fbe3a0,#b7882d 40%,#f5d58c 60%,#8a6320)}
+.inner{position:absolute;inset:0;clip-path:path('M130 0 C 182 28, 260 64, 260 140 L260 380 L0 380 L0 140 C0 64, 78 28, 130 0 Z');
+  background:radial-gradient(circle at 50% 55%,#fff6dc,#ffcf7a 30%,#7a1022 75%);overflow:hidden}
+.door{position:absolute;top:0;bottom:0;width:50%;transition:transform 1.8s cubic-bezier(.6,0,.3,1);
+  background:
+   radial-gradient(circle at 50% 30%,var(--g1) 0 6px,transparent 7px),
+   radial-gradient(circle at 50% 55%,var(--g2) 0 4px,transparent 5px) 0 0/100% 34px,
+   linear-gradient(90deg,var(--m2),var(--m1));
+  border:3px solid var(--g2);box-shadow:inset 0 0 30px rgba(0,0,0,.5)}
+.door.l{left:0;transform-origin:left center;border-right-width:1.5px}
+.door.r{right:0;transform-origin:right center;border-left-width:1.5px}
+.door:after{content:"";position:absolute;top:52%;width:12px;height:12px;border-radius:50%;background:var(--g1);box-shadow:0 0 10px var(--g1)}
+.door.l:after{right:10px}.door.r:after{left:10px}
+.open .door.l{transform:rotateY(-105deg)}.open .door.r{transform:rotateY(105deg)}
+.door-k{margin-top:46px}
+.door-h{font:500 italic 30px/1.2 'Cormorant Garamond';margin-top:12px}
+.door-tap{margin-top:16px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,244,226,.65);animation:blink 1.8s infinite}
+@keyframes blink{50%{opacity:.3}}
+.flash{position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,#fff3d0,rgba(255,200,120,.6) 30%,transparent 70%);opacity:0;pointer-events:none;z-index:25}
+.flash.go{animation:flash 1.6s ease-out}
+@keyframes flash{30%{opacity:1}100%{opacity:0}}
+
+/* ---------- 2. TITLE ---------- */
+.t-small{font:700 14px Cinzel;letter-spacing:.4em;opacity:0;transition:opacity 1s .2s}
+.t-name{font:76px/1 'Pinyon Script';margin:14px 0 6px;opacity:0;transform:scale(.9);transition:all 1.4s .6s;filter:drop-shadow(0 0 22px rgba(255,200,110,.35))}
+.t-line{width:0;height:1px;background:linear-gradient(90deg,transparent,var(--g1),transparent);margin:6px auto 14px;transition:width 1.4s 1.2s}
+.t-sub{font:italic 500 21px/1.45 'Cormorant Garamond';max-width:320px;opacity:0;transition:opacity 1.2s 1.6s}
+.sc.on .t-small,.sc.on .t-name,.sc.on .t-sub{opacity:1;transform:none}
+.sc.on .t-line{width:200px}
+
+/* ---------- 3. MEMORIES (royal jharokha frame) ---------- */
+.frame{position:relative;width:258px;height:362px;opacity:0;transform:translateY(30px) scale(.94);transition:all 1.1s cubic-bezier(.2,.9,.2,1)}
+.frame .gold{position:absolute;inset:0;clip-path:path('M129 0 C 180 26, 258 60, 258 128 L258 362 L0 362 L0 128 C0 60, 78 26, 129 0 Z');
+  background:linear-gradient(135deg,#fde7a8,#b4842a 35%,#f6d68c 55%,#8f6521 80%,#e8c072)}
+.frame .pic{position:absolute;inset:9px;clip-path:path('M120 0 C 168 24, 240 56, 240 120 L240 344 L0 344 L0 120 C0 56, 72 24, 120 0 Z');background:#2a0810;overflow:hidden}
+.frame img{width:100%;height:100%;object-fit:cover;display:block}
+.frame .full img{object-fit:contain}
+.frame .full .bgb{position:absolute;inset:0;filter:blur(14px) brightness(.5);transform:scale(1.2)}
+.frame .full .fg{position:relative}
+.sc.on .frame{opacity:1;transform:none}
+.sc.on .frame img:not(.bgb){animation:kb 4.5s ease-out both}
+@keyframes kb{from{transform:scale(1.12)}to{transform:scale(1)}}
+.frame:after{content:"❖";position:absolute;left:50%;bottom:-14px;transform:translateX(-50%);font-size:22px;color:var(--g1);text-shadow:0 0 10px rgba(255,210,120,.7)}
+.mline{font:italic 500 22px/1.4 'Cormorant Garamond';color:var(--cream);max-width:320px;margin-top:30px;opacity:0;transform:translateY(10px);transition:all 1s 1s}
+.sc.on .mline{opacity:1;transform:none}
+
+/* ---------- 3a. LOTUS — set the butterflies free ---------- */
+.lt-k{font:italic 500 26px 'Cormorant Garamond'}
+.lt-s{font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--g1);margin:8px 0 26px}
+.pond{position:relative;width:330px;height:260px}
+.lotus{position:absolute;width:78px;height:70px;cursor:pointer;transform:translate(-50%,-50%)}
+.lotus svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 6px 10px rgba(0,0,0,.45))}
+.lotus .pt{transform-box:view-box;transform-origin:50px 70px;transition:transform .9s cubic-bezier(.2,1.5,.4,1)}
+.lotus .p1{transform:rotate(0) scaleX(.6)}.lotus .p2{transform:rotate(-12deg) scaleX(.5)}.lotus .p3{transform:rotate(12deg) scaleX(.5)}
+.lotus.open .p2{transform:rotate(-48deg)}.lotus.open .p3{transform:rotate(48deg)}.lotus.open .p1{transform:none}
+.lotus:not(.open){animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{transform:translate(-50%,-50%) scale(1.07)}}
+.lotus .w{position:absolute;left:50%;top:100%;transform:translateX(-50%);font:600 italic 22px 'Cormorant Garamond';color:var(--g1);opacity:0;transition:opacity .6s .3s;white-space:nowrap}
+.lotus.open .w{opacity:1}
+.lt-msg{font:46px/1.1 'Pinyon Script';margin-top:18px;opacity:0;transition:opacity 1.2s}
+.lt-msg.on{opacity:1}
+.lt-help{margin-top:8px;background:none;border:0;color:rgba(255,244,226,.6);font:500 12px Montserrat;text-decoration:underline;cursor:pointer}
+.mini{position:absolute;width:30px;height:24px;z-index:36;pointer-events:none;transition:transform 2.2s ease-in,opacity 2.2s;filter:drop-shadow(0 0 6px rgba(255,210,120,.8))}
+
+/* ---------- 3b. RAJA & RANI — royal seal (both of them) ---------- */
+#s-royal{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.ry-k{font:700 12px Cinzel;letter-spacing:.45em}
+.ry-t{font:60px/1 'Pinyon Script';margin:6px 0 2px;filter:drop-shadow(0 0 18px rgba(255,200,110,.35))}
+.ry-s{font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,244,226,.7);margin-bottom:56px;transition:opacity .6s}
+.locket{position:relative;width:220px;height:220px}
+.locket .half{position:absolute;top:0;width:110px;height:220px;overflow:hidden;border:4px solid var(--g2);background:#2a0810;
+  box-shadow:0 0 22px rgba(255,200,110,.35),inset 0 0 18px rgba(0,0,0,.4);will-change:transform}
+.locket .half.l{left:0;border-radius:110px 0 0 110px;border-right:2px solid var(--g1)}
+.locket .half.r{right:0;border-radius:0 110px 110px 0;border-left:2px solid var(--g1)}
+.locket .half img{position:absolute;top:0;width:212px;height:212px;object-fit:cover;filter:grayscale(.6) brightness(.7);transition:filter 1.2s}
+.locket .half.l img{left:0}.locket .half.r img{right:0}
+.locket .ring{position:absolute;inset:-14px;border-radius:50%;border:2px dashed rgba(243,212,138,.5);animation:spin 18s linear infinite;transition:all 1s}
+@keyframes spin{to{transform:rotate(360deg)}}
+.locket.joined .half{border-color:var(--g1)}
+.locket.joined .half.l{border-right-color:transparent}.locket.joined .half.r{border-left-color:transparent}
+.locket.joined .half img{filter:none}
+.locket .whole{position:absolute;inset:0;border-radius:50%;overflow:hidden;border:4px solid var(--g1);opacity:0;transition:opacity .8s .3s;z-index:2}
+.locket .whole img{width:100%;height:100%;object-fit:cover;display:block}
+.locket.joined .whole{opacity:1}
+.locket.joined .ring{border:3px solid var(--g1);box-shadow:0 0 40px rgba(255,210,120,.7);inset:-10px}
+.locket .rc{position:absolute;left:50%;top:-64px;width:84px;margin-left:-42px;opacity:0;transform:translateY(-120px) rotate(-10deg);
+  transition:transform 1.2s cubic-bezier(.3,1.5,.5,1),opacity .5s;filter:drop-shadow(0 0 12px rgba(255,210,120,.8));z-index:3}
+.locket.joined .rc{opacity:1;transform:none}
+.seal{position:relative;width:86px;height:86px;margin-top:34px;border-radius:50%;cursor:pointer;touch-action:none;transition:opacity .6s,transform .2s}
+.seal svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.seal .core{position:absolute;inset:9px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;
+  background:radial-gradient(circle at 35% 30%,#d8324f,#8e0f27 60%,#5a0716);border:2px solid var(--g2);box-shadow:0 6px 18px rgba(0,0,0,.5),inset 0 2px 6px rgba(255,255,255,.25);
+  font:700 13px Cinzel;color:var(--g1);letter-spacing:.06em;line-height:1.1}
+.seal .core small{font:500 8px Montserrat;letter-spacing:.2em;opacity:.8;margin-top:2px}
+.seal.hold{transform:scale(.93)}
+.seal:not(.hold) .core{animation:beat 1.6s ease-in-out infinite}
+@keyframes beat{50%{box-shadow:0 0 0 10px rgba(216,50,79,.18),0 6px 18px rgba(0,0,0,.5)}}
+.ry-msg{font:40px/1.15 'Pinyon Script';margin-top:26px;max-width:340px;opacity:0;transition:opacity 1.2s}
+.ry-msg.on{opacity:1}
+.ry-sub{font:italic 500 18px 'Cormorant Garamond';opacity:0;transition:opacity 1.2s .8s;margin-top:4px}
+.ry-sub.on{opacity:1}
+
+/* ---------- 4. FINALE — crown for the queen ---------- */
+#s-final{justify-content:flex-start;padding-top:56px;overflow-y:auto;overflow-x:hidden}
+#s-final > *{flex-shrink:0}
+.fwrap{position:relative;margin-top:30px}
+.crown{position:absolute;left:50%;top:-58px;width:96px;margin-left:-48px;z-index:4;transform:translateY(-260px) rotate(-12deg);opacity:0;
+  transition:transform 1.4s cubic-bezier(.3,1.5,.5,1) 1s,opacity .6s 1s;filter:drop-shadow(0 0 14px rgba(255,210,120,.8))}
+.sc.on .crown{transform:none;opacity:1}
+.f-k{font:700 13px Cinzel;letter-spacing:.4em;margin-top:30px;opacity:0;transition:opacity 1s 2.2s}
+.f-n{font:58px/1.05 'Pinyon Script';margin-top:6px;opacity:0;transition:opacity 1s 2.5s}
+.sc.on .f-k,.sc.on .f-n{opacity:1}
+.note{max-width:340px;margin-top:12px;font:italic 500 19px/1.5 'Cormorant Garamond';color:rgba(255,244,226,.9)}
+.note p{opacity:0;transform:translateY(8px);transition:all 1s;margin-bottom:8px}
+.note p.s{opacity:1;transform:none}
+.sign{font:34px/1.2 'Pinyon Script';color:var(--g1);margin-top:4px;opacity:0;transition:opacity 1.2s}
+.sign.s{opacity:1}
+.reel{width:100%;overflow:hidden;margin-top:18px;opacity:0;transition:opacity 1.2s;-webkit-mask:linear-gradient(90deg,transparent,#000 15%,#000 85%,transparent);mask:linear-gradient(90deg,transparent,#000 15%,#000 85%,transparent)}
+.reel.s{opacity:1}
+.reel .trk{display:flex;gap:10px;width:max-content;animation:roll 22s linear infinite}
+.reel img{width:64px;height:84px;object-fit:cover;border-radius:6px;border:2px solid var(--g2);background:#2a0810}
+@keyframes roll{to{transform:translateX(-50%)}}
+.again{margin:20px 0 34px;background:none;border:1px solid var(--g2);color:var(--g1);font:600 11px Montserrat;letter-spacing:.3em;text-transform:uppercase;padding:12px 22px;border-radius:30px;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <div id="warn"></div>
+  <div class="silk"></div>
+  <div class="zari t"></div><div class="zari b"></div>
+  <div class="flash" id="flash"></div>
+  <canvas id="fx"></canvas>
+
+  <!-- golden butterfly (flies across the whole surprise) -->
+  <div id="bf"><div class="in"><svg class="bfy" viewBox="0 0 100 80">
+    <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff1c4"/><stop offset=".5" stop-color="#e2b552"/><stop offset="1" stop-color="#9c7224"/></linearGradient></defs>
+    <g class="wl"><path d="M50 40 C32 6, 2 4, 8 30 C12 46, 34 46, 50 42 Z" fill="url(#bg)" stroke="#fff3d0" stroke-width="1"/><path d="M50 43 C36 50, 16 68, 28 74 C40 78, 48 58, 50 46 Z" fill="url(#bg)" stroke="#fff3d0" stroke-width="1"/><circle cx="24" cy="26" r="4" fill="#7a1022" opacity=".6"/></g>
+    <g class="wr"><path d="M50 40 C68 6, 98 4, 92 30 C88 46, 66 46, 50 42 Z" fill="url(#bg)" stroke="#fff3d0" stroke-width="1"/><path d="M50 43 C64 50, 84 68, 72 74 C60 78, 52 58, 50 46 Z" fill="url(#bg)" stroke="#fff3d0" stroke-width="1"/><circle cx="76" cy="26" r="4" fill="#7a1022" opacity=".6"/></g>
+    <ellipse cx="50" cy="44" rx="2.6" ry="14" fill="#5a3a0e"/><path d="M49 31 Q44 20 40 18 M51 31 Q56 20 60 18" stroke="#5a3a0e" stroke-width="1.2" fill="none"/>
+  </svg></div></div>
+
+  <!-- 1. PALACE DOORS -->
+  <section class="sc on" id="s-door">
+    <div class="kick door-k" id="doorKick">For my queen</div>
+    <div class="door-h goldtxt" id="doorTitle"></div>
+    <div class="doorwrap" id="doorwrap">
+      <div class="arch"></div>
+      <div class="inner"><div class="door l"></div><div class="door r"></div></div>
+    </div>
+    <div class="door-tap">Tap to open</div>
+  </section>
+
+  <!-- 2. TITLE -->
+  <section class="sc" id="s-title">
+    <div class="t-small goldtxt">HAPPY BIRTHDAY</div>
+    <div class="t-name goldtxt" id="tName"></div>
+    <div class="t-line"></div>
+    <div class="t-sub" id="tSub"></div>
+  </section>
+
+  <div id="moments"></div>
+
+  <!-- 3a. LOTUS -->
+  <section class="sc" id="s-lotus">
+    <div class="lt-k" id="ltTitle"></div>
+    <div class="lt-s" id="ltHint"></div>
+    <div class="pond" id="pond"></div>
+    <div class="lt-msg goldtxt" id="ltMsg"></div>
+    <button class="lt-help" id="ltHelp" hidden>Open them all for me ✨</button>
+  </section>
+
+  <!-- 3b. RAJA & RANI -->
+  <section class="sc" id="s-royal">
+    <div class="ry-k goldtxt" id="ryKick"></div>
+    <div class="ry-t goldtxt" id="ryTitle"></div>
+    <div class="ry-s" id="ryHint"></div>
+    <div class="locket" id="locket">
+      <div class="ring"></div>
+      <svg class="rc" viewBox="0 0 120 80"><use href="#crownShape"/></svg>
+      <div class="half l"><img id="ryL" alt=""></div>
+      <div class="half r"><img id="ryR" alt=""></div>
+      <div class="whole"><img id="ryW" alt=""></div>
+    </div>
+    <div class="seal" id="seal">
+      <svg viewBox="0 0 86 86"><circle cx="43" cy="43" r="40" fill="none" stroke="rgba(243,212,138,.2)" stroke-width="4"/>
+        <circle id="sealRing" cx="43" cy="43" r="40" fill="none" stroke="#f3d48a" stroke-width="4" stroke-linecap="round" stroke-dasharray="251.3" stroke-dashoffset="251.3"/></svg>
+      <div class="core" id="sealTxt">N ♥ R<small>HOLD</small></div>
+    </div>
+    <div class="ry-msg goldtxt" id="ryMsg"></div>
+    <div class="ry-sub" id="rySub"></div>
+    <button class="lt-help" id="ryHelp" hidden>Unite us for me ✨</button>
+  </section>
+
+  <!-- 4. FINALE -->
+  <section class="sc" id="s-final">
+    <div class="fwrap">
+      <svg class="crown" viewBox="0 0 120 80"><defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff1c4"/><stop offset=".5" stop-color="#e2b552"/><stop offset="1" stop-color="#9c7224"/></linearGradient></defs>
+        <g id="crownShape"><path d="M10 70 L4 20 L32 44 L60 6 L88 44 L116 20 L110 70 Z" fill="url(#cg)" stroke="#fff3d0" stroke-width="2"/>
+        <rect x="10" y="64" width="100" height="12" rx="3" fill="url(#cg)" stroke="#fff3d0" stroke-width="1.5"/>
+        <circle cx="60" cy="40" r="6" fill="#b3123a"/><circle cx="32" cy="54" r="4" fill="#1f7a4d"/><circle cx="88" cy="54" r="4" fill="#1f7a4d"/>
+        <circle cx="4" cy="20" r="4" fill="#fff1c4"/><circle cx="60" cy="6" r="5" fill="#fff1c4"/><circle cx="116" cy="20" r="4" fill="#fff1c4"/></g></svg>
+      <div class="frame" id="finFrame"></div>
+    </div>
+    <div class="f-k goldtxt">HAPPY BIRTHDAY</div>
+    <div class="f-n goldtxt" id="fName"></div>
+    <div class="note" id="note"></div>
+    <div class="sign" id="sign"></div>
+    <div class="reel" id="reel"><div class="trk" id="trk"></div></div>
+    <button class="again" id="again" hidden>↺ Once more</button>
+  </section>
+</div>
+
+<script>
+/* =========================================================
+   ✏️ EDIT EVERYTHING HERE
+   ========================================================= */
+const LOVE = {
+  name: "Roshini",
+  from: "— Forever yours, Navakethan",
+  song: "song.mp3",                        // your song file ("" = no song)
+  photos: ["one", "two", "three", "Four", "five", "six", "seven"],   // exact file names (.jpeg/.jpg/.png auto)
+  fullPhotos: [],                          // photo numbers to show FULL (no crop), e.g. [6]
+  crownPhoto: 1,                           // photo used in the finale with the crown
+
+  doorTitle: "Something royal is waiting for you…",
+  titleSub: "To the woman who makes every day feel like a celebration.",
+
+  lines: [
+    "The most graceful woman I know — and she's mine.",            // 1 saree
+    "My queen — on her throne, and forever in my heart.",           // 2 throne
+    "Every celebration is brighter with you in it.",                // 3 party
+    "Dancing through life with you is my favourite festival.",      // 4 garba
+    "Effortlessly beautiful — even the mirror agrees.",             // 5 mirror selfie
+    "My butterfly — glowing, free and full of colour.",             // 6 purple lehenga
+    "And I'll keep choosing you — every single day."
+  ],
+  photoTime: 3600,
+
+  // ROYAL SCENE for both of you: she holds the seal, the two halves join
+  royalAfter: 4,                           // comes after this photo number
+  royalPhoto: 2,                           // couple photo inside the locket
+  royalKick: "THE ROYAL COUPLE",
+  husband: "Navakethan",
+  royalTitle: "Raja & Rani",
+  royalHint: "Hold the royal seal to unite us",
+  royalMsg: "Two hearts, one kingdom",
+  royalSub: "Navakethan & Roshini — together, we rule our little world 👑",
+
+  // later: she opens golden lotuses to set butterflies free
+  lotusAfter: 6,                           // comes after this photo number
+  lotusTitle: "Set the butterflies free 🦋",
+  lotusHint: "Tap each lotus",
+  lotusWords: ["You", "are", "my", "whole", "world"],
+  lotusMsg: "You are my whole world",
+
+  note: [
+    "Roshini,",
+    "You walked into my life and made everything beautiful.",
+    "Thank you for your love, your patience, and that smile I could look at forever.",
+    "Today the world celebrates you — and I celebrate the day you became mine.",
+    "Happy birthday, my queen. 👑🤍"
+  ]
+};
+/* ========================================================= */
+
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const app = $("#app");
+const wait = ms => new Promise(r => setTimeout(r, ms));
+const at = el => { const a = app.getBoundingClientRect(), r = el.getBoundingClientRect(); return [r.left - a.left + r.width / 2, r.top - a.top + r.height / 2]; };
+const box = el => { const a = app.getBoundingClientRect(), r = el.getBoundingClientRect(); return { l: r.left - a.left, t: r.top - a.top, w: r.width, h: r.height }; };
+
+/* ---------- build ---------- */
+$("#doorTitle").textContent = LOVE.doorTitle;
+$("#tName").textContent = LOVE.name;
+$("#tSub").textContent = LOVE.titleSub;
+$("#fName").textContent = "my Queen " + LOVE.name;
+$("#sign").textContent = LOVE.from;
+$("#note").innerHTML = LOVE.note.map(p => `<p>${p}</p>`).join("");
+$("#ltTitle").textContent = LOVE.lotusTitle;
+$("#ltHint").textContent = LOVE.lotusHint;
+$("#ltMsg").textContent = LOVE.lotusMsg;
+$("#ryKick").textContent = LOVE.royalKick;
+$("#ryTitle").textContent = LOVE.royalTitle;
+$("#ryHint").textContent = LOVE.royalHint;
+$("#ryMsg").textContent = LOVE.royalMsg;
+$("#rySub").textContent = LOVE.royalSub;
+$("#sealTxt").firstChild.textContent = LOVE.husband[0] + " ♥ " + LOVE.name[0];
+$("#ryL").dataset.ph = $("#ryR").dataset.ph = $("#ryW").dataset.ph = LOVE.royalPhoto - 1;
+
+const frameHTML = (i) => (LOVE.fullPhotos || []).includes(i + 1)
+  ? `<div class="gold"></div><div class="pic full"><img class="bgb" data-ph="${i}" alt=""><img class="fg" data-ph="${i}" alt=""></div>`
+  : `<div class="gold"></div><div class="pic"><img data-ph="${i}" alt=""></div>`;
+$("#moments").innerHTML = LOVE.photos.map((_, i) => `
+  <section class="sc" id="m${i}">
+    <div class="frame">${frameHTML(i)}</div>
+    <div class="mline">${LOVE.lines[i] || ""}</div>
+  </section>`).join("");
+$("#finFrame").innerHTML = frameHTML(LOVE.crownPhoto - 1);
+const thumbs = LOVE.photos.map((_, i) => `<img data-ph="${i}" alt="">`).join("");
+$("#trk").innerHTML = thumbs + thumbs;
+
+/* ---------- photos ---------- */
+const EXT = [".jpeg", ".jpg", ".JPG", ".JPEG", ".png", ".webp"];
+function tryLoad(base, i = 0) {
+  return new Promise(res => {
+    if (i >= EXT.length) return res(null);
+    const im = new Image();
+    im.onload = () => res(base + EXT[i]);
+    im.onerror = () => tryLoad(base, i + 1).then(res);
+    im.src = encodeURI(base + EXT[i]);
+  });
+}
+Promise.all(LOVE.photos.map(p => tryLoad(p))).then(urls => {
+  const miss = [];
+  urls.forEach((u, i) => { if (!u) return miss.push(LOVE.photos[i]); $$(`[data-ph="${i}"]`).forEach(el => el.src = encodeURI(u)); });
+  if (miss.length) { const w = $("#warn"); w.textContent = "⚠️ Photo not found: " + miss.join(", ") + " — keep it in the same folder as index.html"; w.style.display = "block"; }
+});
+
+/* ---------- golden dust / sparkles ---------- */
+const cv = $("#fx"), cx = cv.getContext("2d"); let P = [];
+function fit() { const r = app.getBoundingClientRect(), k = devicePixelRatio || 1; cv.width = r.width * k; cv.height = r.height * k; cx.setTransform(k, 0, 0, k, 0, 0); }
+fit(); addEventListener("resize", fit);
+const GC = ["#fff1c4", "#f3d48a", "#e2b552", "#ffffff", "#ffb8c6"];
+function sparkle(x, y, n = 100) {
+  for (let i = 0; i < n; i++) { const a = Math.random() * 6.28, sp = 1.5 + Math.random() * 6;
+    P.push({ x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 1.5, g: .06, s: 1 + Math.random() * 2.6, c: GC[i % 5], l: 1, d: .012 }); }
+}
+function dust(n = 40) {
+  const W = app.clientWidth, H = app.clientHeight;
+  for (let i = 0; i < n; i++) P.push({ x: Math.random() * W, y: H + Math.random() * 200, vx: (Math.random() - .5) * .4, vy: -.5 - Math.random() * 1.1, g: 0, s: .8 + Math.random() * 2, c: GC[i % 4], l: 1, d: .003 });
+}
+(function loop() {
+  const W = app.clientWidth, H = app.clientHeight; cx.clearRect(0, 0, W, H);
+  P = P.filter(p => p.l > 0 && p.y > -40 && p.y < H + 260);
+  for (const p of P) {
+    p.vy += p.g; p.x += p.vx; p.y += p.vy; p.l -= p.d;
+    cx.globalAlpha = Math.max(0, Math.min(1, p.l)); cx.fillStyle = p.c;
+    cx.beginPath(); cx.arc(p.x, p.y, p.s, 0, 7); cx.fill();
+  }
+  cx.globalAlpha = 1;
+  requestAnimationFrame(loop);
+})();
+setInterval(() => dust(4), 900);
+
+/* ---------- butterfly flight ---------- */
+const bf = $("#bf");
+function flyTo(x, y, ms = 1500, rest = false) {
+  bf.style.transition = `transform ${ms}ms cubic-bezier(.45,.05,.3,1)`;
+  bf.style.transform = `translate(${x - 29}px,${y - 23}px)`;
+  bf.classList.toggle("rest", rest);
+  return wait(ms);
+}
+function bfStart() {
+  const d = box($("#doorwrap"));
+  bf.style.transition = "none";
+  bf.style.transform = `translate(${d.l + d.w / 2 - 29}px,${d.t + d.h * .5 - 23}px)`;
+  bf.classList.add("rest");
+}
+requestAnimationFrame(bfStart); addEventListener("resize", () => { if (!started) bfStart(); });
+
+/* ---------- lotus pond ---------- */
+function lotusGame() {
+  return new Promise(res => {
+    const pond = $("#pond"), n = LOVE.lotusWords.length, opened = new Set(); let done = false;
+    const pos = [[16, 30], [50, 16], [84, 30], [30, 74], [70, 74], [50, 48]];
+    pond.innerHTML = LOVE.lotusWords.map((w, i) => `
+      <div class="lotus" data-i="${i}" style="left:${pos[i % 6][0]}%;top:${pos[i % 6][1]}%">
+        <svg viewBox="0 0 100 80"><defs><linearGradient id="lg${i}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe3ec"/><stop offset=".6" stop-color="#f08aa6"/><stop offset="1" stop-color="#b3123a"/></linearGradient></defs>
+          <ellipse cx="50" cy="72" rx="34" ry="7" fill="#1f5a3a" opacity=".85"/>
+          <path class="pt p2" d="M50 70 C30 60, 26 34, 50 14 C74 34, 70 60, 50 70 Z" fill="url(#lg${i})" stroke="#fff3d0" stroke-width="1"/>
+          <path class="pt p3" d="M50 70 C30 60, 26 34, 50 14 C74 34, 70 60, 50 70 Z" fill="url(#lg${i})" stroke="#fff3d0" stroke-width="1"/>
+          <path class="pt p1" d="M50 70 C32 58, 30 30, 50 8 C70 30, 68 58, 50 70 Z" fill="url(#lg${i})" stroke="#fff3d0" stroke-width="1.2"/>
+        </svg><span class="w">${w}</span></div>`).join("");
+    function release(el) {
+      const i = +el.dataset.i; if (opened.has(i) || done) return; opened.add(i);
+      el.classList.add("open");
+      const [x, y] = at(el); sparkle(x, y - 10, 40);
+      const m = document.createElement("div"); m.className = "mini";
+      m.innerHTML = $(".bfy").outerHTML; m.style.transform = `translate(${x - 15}px,${y - 20}px)`;
+      app.appendChild(m);
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        m.style.transform = `translate(${x - 15 + (Math.random() - .5) * 220}px,-80px) rotate(${(Math.random() - .5) * 60}deg)`; m.style.opacity = .2;
+      }));
+      setTimeout(() => m.remove(), 2400);
+      if (opened.size === n) finish();
+    }
+    function finish() {
+      if (done) return; done = true;
+      $$(".lotus").forEach(l => { l.classList.add("open"); });
+      $("#ltHelp").hidden = true; $("#ltMsg").classList.add("on");
+      const [x, y] = at(pond); sparkle(x, y, 160);
+      setTimeout(res, 3200);
+    }
+    $$(".lotus").forEach(l => l.addEventListener("pointerdown", () => release(l)));
+    $("#ltHelp").onclick = () => { $$(".lotus").forEach(l => release(l)); finish(); };
+    setTimeout(() => { if (!done) { const b = $("#ltHelp"); b.hidden = false; b.removeAttribute("hidden"); } }, 20000);
+  });
+}
+
+/* ---------- Raja & Rani royal seal ---------- */
+function royalGame() {
+  return new Promise(res => {
+    const seal = $("#seal"), ring = $("#sealRing"), L = $(".locket .half.l"), Rt = $(".locket .half.r");
+    let p = 0, hold = false, auto = false, done = false, last = performance.now();
+    const set = () => {
+      const gap = 62 * (1 - p);
+      L.style.transform = `translateX(${-gap}px)`; Rt.style.transform = `translateX(${gap}px)`;
+      ring.style.strokeDashoffset = 251.3 * (1 - p);
+    };
+    set();
+    const on = e => { e.preventDefault(); hold = true; seal.classList.add("hold"); try { navigator.vibrate && navigator.vibrate(15); } catch (_) {} };
+    const off = () => { hold = false; seal.classList.remove("hold"); };
+    seal.addEventListener("pointerdown", on);
+    ["pointerup", "pointerleave", "pointercancel"].forEach(ev => seal.addEventListener(ev, off));
+    seal.addEventListener("contextmenu", e => e.preventDefault());
+    let tick = 0;
+    (function step(t) {
+      if (done) return;
+      const dt = t - last; last = t;
+      if (hold || auto) p = Math.min(1, p + dt / 2200); else p = Math.max(0, p - dt / 3500);
+      set();
+      if ((hold || auto) && (tick += dt) > 180) { tick = 0; const [x, y] = at(seal); sparkle(x, y, 6); }
+      if (p >= 1) return finish();
+      requestAnimationFrame(step);
+    })(last);
+    function finish() {
+      done = true; off();
+      seal.style.display = "none"; $("#ryHint").style.opacity = 0; $("#ryHelp").hidden = true;
+      $("#locket").classList.add("joined");
+      $("#flash").classList.remove("go"); void $("#flash").offsetWidth; $("#flash").classList.add("go");
+      const [x, y] = at($("#locket")); sparkle(x, y, 220); dust(60);
+      setTimeout(() => { $("#ryMsg").classList.add("on"); $("#rySub").classList.add("on"); }, 700);
+      setTimeout(res, 4600);
+    }
+    $("#ryHelp").onclick = () => { auto = true; };
+    setTimeout(() => { if (!done) { const b = $("#ryHelp"); b.hidden = false; b.removeAttribute("hidden"); } }, 20000);
+  });
+}
+
+/* ---------- song ---------- */
+let song;
+function startSong() {
+  if (!LOVE.song || song) return;
+  song = new Audio(LOVE.song); song.loop = true; song.volume = 0; song.play().catch(() => {});
+  let v = 0; const f = setInterval(() => { v = Math.min(.85, v + .05); song.volume = v; if (v >= .85) clearInterval(f); }, 120);
+}
+
+/* ---------- flow ---------- */
+function show(id) { $$(".sc.on").forEach(s => s.classList.remove("on")); const el = $("#" + id); void el.offsetWidth; el.classList.add("on"); return el; }
+async function landOn(el) {           // butterfly lands on the top-right of a frame
+  await wait(300);
+  const b = box(el);
+  await flyTo(b.l + b.w - 18, b.t + 40, 1300, true);
+}
+
+let started = false;
+$("#s-door").addEventListener("click", async () => {
+  if (started) return; started = true;
+  startSong();
+  bf.classList.remove("rest");
+  await flyTo(app.clientWidth * .78, 70, 900);
+  $("#doorwrap").classList.add("open");
+  setTimeout(() => { $("#flash").classList.add("go"); const [x, y] = at($("#doorwrap")); sparkle(x, y, 180); dust(60); }, 700);
+  await wait(1900);
+  show("s-title");
+  flyTo(app.clientWidth * .5 + 110, app.clientHeight * .5 - 80, 1600, true);
+  await wait(4300);
+  for (let i = 0; i < LOVE.photos.length; i++) {
+    const s = show("m" + i);
+    landOn(s.querySelector(".frame"));
+    await wait(LOVE.photoTime);
+    if (i + 1 === LOVE.royalAfter) {
+      show("s-royal");
+      flyTo(46, 96, 1200, true);
+      await royalGame();
+    }
+    if (i + 1 === LOVE.lotusAfter) {
+      show("s-lotus");
+      flyTo(app.clientWidth - 50, 90, 1200, true);
+      await lotusGame();
+    }
+  }
+  // finale
+  flyTo(app.clientWidth / 2, -80, 1400);
+  show("s-final");
+  setTimeout(() => { const [x, y] = at($("#finFrame")); sparkle(x, y - 160, 200); dust(80); }, 2200);
+  await wait(3600);
+  const fs = $("#s-final"), down = () => fs.scrollTo({ top: fs.scrollHeight, behavior: "smooth" });
+  for (const p of $$("#note p")) { p.classList.add("s"); down(); await wait(1400); }
+  $("#sign").classList.add("s"); down(); await wait(900);
+  $("#reel").classList.add("s");
+  const a = $("#again"); a.hidden = false; a.removeAttribute("hidden"); down();
+  await wait(900); flyTo(app.clientWidth - 46, app.clientHeight - 120, 1600, true);
+});
+$("#again").onclick = () => location.reload();
+</script>
+</body>
+</html>
