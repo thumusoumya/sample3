@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>For My Queen 👑</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%91%91%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
 <style>
 /* =========================================================
@@ -342,6 +343,7 @@ body{background:#000;display:flex;justify-content:center;overflow:hidden;font-fa
   </section>
 </div>
 
+<script src="crypto.js"></script>
 <script>
 /* =========================================================
    ✏️ EDIT EVERYTHING HERE
@@ -350,7 +352,8 @@ const LOVE = {
   name: "Roshini",
   from: "— Forever yours, kethan",
   song: "sample3.mpeg",                    // your song file ("" = no song)
-  photos: ["one", "two", "Four"],   // exact file names (.jpeg/.jpg/.png auto)
+  encKey: "YOUR_ENCRYPTION_PASSWORD",      // the EXACT password the enc/*.bin files were encrypted with
+  photos: ["one", "two", "Four"],          // file names WITHOUT extension: loaded from enc/<name>.bin
   fullPhotos: [],                          // photo numbers to show FULL (no crop), e.g. [6]
   crownPhoto: 1,                           // photo used in the finale with the crown
 
@@ -447,22 +450,20 @@ $("#finFrame").innerHTML = frameHTML(LOVE.crownPhoto - 1);
 const thumbs = LOVE.photos.map((_, i) => `<img data-ph="${i}" alt="">`).join("");
 $("#trk").innerHTML = thumbs + thumbs;
 
-/* ---------- photos ---------- */
-const EXT = [".jpeg", ".jpg", ".JPG", ".JPEG", ".png", ".webp"];
-function tryLoad(base, i = 0) {
-  return new Promise(res => {
-    if (i >= EXT.length) return res(null);
-    const im = new Image();
-    im.onload = () => res(base + EXT[i]);
-    im.onerror = () => tryLoad(base, i + 1).then(res);
-    im.src = encodeURI(base + EXT[i]);
+/* ---------- photos: decrypted from enc/<name>.bin into blob: URLs ---------- */
+function loadPhotos() {
+  return Promise.all(LOVE.photos.map(async (p, i) => {
+    try {
+      const buf = await decryptFile(LOVE.encKey, encodeURI("enc/" + p + ".bin"));
+      const url = URL.createObjectURL(new Blob([buf], { type: "image/jpeg" }));
+      $$(`[data-ph="${i}"]`).forEach(el => el.src = url);
+      return null;
+    } catch (e) { return p; }
+  })).then(miss => {
+    miss = miss.filter(Boolean);
+    if (miss.length) { const w = $("#warn"); w.textContent = "⚠️ Could not decrypt: " + miss.join(", ") + " — check enc/ folder and encKey (needs https or localhost)"; w.style.display = "block"; }
   });
 }
-Promise.all(LOVE.photos.map(p => tryLoad(p))).then(urls => {
-  const miss = [];
-  urls.forEach((u, i) => { if (!u) return miss.push(LOVE.photos[i]); $$(`[data-ph="${i}"]`).forEach(el => el.src = encodeURI(u)); });
-  if (miss.length) { const w = $("#warn"); w.textContent = "⚠️ Photo not found: " + miss.join(", ") + " — keep it in the same folder as index.html"; w.style.display = "block"; }
-});
 
 /* ---------- golden dust / sparkles ---------- */
 const cv = $("#fx"), cx = cv.getContext("2d"); let P = [];
@@ -666,6 +667,7 @@ let started = false;
 $("#s-door").addEventListener("click", async () => {
   if (started) return; started = true;
   startSong();
+  const imgsReady = loadPhotos();   // decrypt the photos while the doors open, the cake and the story play
   bf.classList.remove("rest");
   $("#doorwrap").classList.add("open");
   flyTo(app.clientWidth * .78, 70, 900);
@@ -679,6 +681,7 @@ $("#s-door").addEventListener("click", async () => {
   await wait(900);
   await typeStory();
   await wait(1200);
+  await imgsReady;   // make sure every photo is ready before the first one appears
   for (let i = 0; i < LOVE.photos.length; i++) {
     const s = show("m" + i);
     landOn(s.querySelector(".frame"));
